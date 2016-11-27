@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_puzzle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.magomed.gamzatov.medlite.activity.PuzzleActivity">
+
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Match injections with correct angles:"
+        android:textSize="19sp"
+        android:id="@+id/puzzle_text"
+        />
+
+    <LinearLayout
+        android:id="@+id/puzzle_body"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/puzzle_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/puzzle_text_rv"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/puzzle_rv"
+            />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/puzzle_body"
+        android:id="@+id/puzzle_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:layout_alignParentEnd="true"
+        android:text="Submit"/>
+
+</RelativeLayout>
