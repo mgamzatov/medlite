@@ -13,10 +13,9 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@mipmap/medlite"
-            android:layout_width="105dp"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
+        <ImageView android:src="@mipmap/logolarge"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal" />
 
@@ -24,7 +23,6 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_name"
                 android:layout_width="match_parent"
@@ -71,18 +69,7 @@
                 android:hint="Phone"/>
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/input_callCharge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:visibility="gone"
-                android:hint="Call charge"/>
-        </android.support.design.widget.TextInputLayout>
+
 
         <ImageView android:src="@mipmap/emptyphoto"
             android:id="@+id/addPhoto"
@@ -96,6 +83,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/isMedic" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_callCharge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:visibility="gone"
+                android:hint="Call charge"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView android:src="@mipmap/diploma"
+            android:id="@+id/addCert"
+            android:layout_width="155dp"
+            android:layout_height="155dp"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal" />
 
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton

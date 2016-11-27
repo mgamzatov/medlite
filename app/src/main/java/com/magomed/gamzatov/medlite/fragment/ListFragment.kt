@@ -1,6 +1,7 @@
 package com.magomed.gamzatov.medlite.fragment
 
 import android.app.ProgressDialog
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
@@ -32,6 +33,8 @@ import org.jetbrains.anko.support.v4.longToast
 import retrofit2.Call
 import retrofit2.Callback
 import java.util.*
+
+
 
 
 class ListFragment : Fragment() {
@@ -69,19 +72,19 @@ class ListFragment : Fragment() {
 
         ItemClickSupport.addTo(rv).setOnItemClickListener(object: ItemClickSupport.OnItemClickListener {
             override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
+
                 val nurse = nurses[position]
-                val builder = AlertDialog.Builder(activity)
-                builder.setMessage("Send request to ${nurse.name} (${nurse.phone}) ?")
-                builder.setCancelable(true)
-                builder.setPositiveButton("Yes", { dialog, which ->
-                    addVisit(nurse.id.toString())
-                    dialog.dismiss()
-                })
-                builder.setNegativeButton("No", { dialog, which ->
-                    dialog.dismiss()
-                })
-                val dialog = builder.create()
-                dialog.show()
+
+                val ft = fragmentManager.beginTransaction()
+                val prev = fragmentManager.findFragmentByTag("dialog")
+                if (prev != null) {
+                    ft.remove(prev)
+                }
+                ft.addToBackStack(null)
+
+                val newFragment = ProfileDialog.newInstance(nurse.id?.toLong()!!)
+                newFragment.show(ft, "dialog")
+
             }
 
         })
@@ -97,31 +100,6 @@ class ListFragment : Fragment() {
         }
 
         this.nurses.addAll(nurses)
-    }
-
-    private fun addVisit(snippet: String) {
-        val progressDialog = ProgressDialog(activity)
-        progressDialog.isIndeterminate = true
-        progressDialog.setMessage("Sending...")
-        progressDialog.show()
-
-        val visitRequest = ServiceGenerator.createService(AddVisitRequest::class.java)
-        val pref = PreferenceManager.getDefaultSharedPreferences(activity.baseContext)
-        val call = visitRequest.postJSON(pref.getString("cookie", ""), AddVisit(snippet.toLong()))
-        call.enqueue(object: Callback<Message> {
-            override fun onResponse(call: Call<Message>?, response: retrofit2.Response<Message>?) {
-                Log.d("onResponse", response?.body().toString())
-                longToast("success")
-                progressDialog.dismiss()
-            }
-
-            override fun onFailure(call: Call<Message>?, t: Throwable?) {
-                longToast(t.toString())
-                Log.d("onFailure", t.toString())
-                progressDialog.dismiss()
-            }
-
-        })
     }
 
 }

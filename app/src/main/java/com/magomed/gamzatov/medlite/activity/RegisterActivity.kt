@@ -31,6 +31,8 @@ import java.io.ByteArrayOutputStream
 class RegisterActivity : AppCompatActivity(), IPickResult.IPickResultBitmap {
 
     var imagePicked = false
+    var certPicked = false
+    var pickerCode = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,14 +47,22 @@ class RegisterActivity : AppCompatActivity(), IPickResult.IPickResultBitmap {
         }
 
         addPhoto.setOnClickListener {
+            pickerCode = 0
+            PickImageDialog.on(this@RegisterActivity, PickSetup())
+        }
+
+        addCert.setOnClickListener {
+            pickerCode = 1
             PickImageDialog.on(this@RegisterActivity, PickSetup())
         }
 
         isMedic.setOnClickListener {
             if(isMedic.isChecked) {
                 input_callCharge.visibility = View.VISIBLE
+                addCert.visibility = View.VISIBLE
             } else {
                 input_callCharge.visibility = View.GONE
+                addCert.visibility = View.GONE
             }
         }
     }
@@ -84,10 +94,11 @@ class RegisterActivity : AppCompatActivity(), IPickResult.IPickResultBitmap {
         val isMedic = isMedic.isChecked.toString()
         val callCharge = input_callCharge.text.toString()
         val photo = if (imagePicked) (addPhoto.drawable as BitmapDrawable).bitmap.encodeToBase64() else ""
+        val certificate = if (certPicked) (addCert.drawable as BitmapDrawable).bitmap.encodeToBase64() else ""
 
         val registerRequest = ServiceGenerator.createService(RegisterRequest::class.java)
 
-        val call = registerRequest.postJSON(isMedic, Register(name, email, password, phone, photo, callCharge))
+        val call = registerRequest.postJSON(isMedic, Register(name, email, password, phone, photo, callCharge, certificate))
         call.enqueue(object : Callback<Message> {
             override fun onResponse(call: Call<Message>?, response: Response<Message>?) {
                 if (response != null && response.body() != null) {
@@ -106,8 +117,17 @@ class RegisterActivity : AppCompatActivity(), IPickResult.IPickResultBitmap {
 
     override fun onPickImageResult(bitmap: Bitmap?) {
         if(bitmap!=null) {
-            addPhoto.setImageBitmap(bitmap)
-            imagePicked = true
+            when (pickerCode) {
+                0 -> {
+                    addPhoto.setImageBitmap(bitmap)
+                    imagePicked = true
+                }
+
+                1 -> {
+                    addCert.setImageBitmap(bitmap)
+                    certPicked = true
+                }
+            }
         }
     }
 

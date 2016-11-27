@@ -61,8 +61,10 @@ class HistoryFragment : Fragment() {
                     val visit = visits[position]
 
                     // Create and show the dialog.
-                    val newFragment = RateDialog.newInstance(visit.id!!, visit.medicName, visit.medicPhone, visit.rating!!, 500)
-                    newFragment.show(ft, "dialog")
+                    if(visit.confirmed != 0) {
+                        val newFragment = RateDialog.newInstance(visit.id!!, visit.medicName, visit.medicPhone, visit.rating!!, 500)
+                        newFragment.show(ft, "dialog")
+                    }
                 }
 
             })

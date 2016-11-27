@@ -11,12 +11,9 @@ import android.widget.RatingBar
 import com.magomed.gamzatov.medlite.R
 import android.widget.TextView
 import com.magomed.gamzatov.medlite.model.Message
-import com.magomed.gamzatov.medlite.model.Profile
 import com.magomed.gamzatov.medlite.model.Rating
-import com.magomed.gamzatov.medlite.network.ProfileRequest
 import com.magomed.gamzatov.medlite.network.RatingRequest
 import com.magomed.gamzatov.medlite.network.ServiceGenerator
-import kotlinx.android.synthetic.main.fragment_profile.*
 import org.jetbrains.anko.enabled
 import retrofit2.Call
 import retrofit2.Callback

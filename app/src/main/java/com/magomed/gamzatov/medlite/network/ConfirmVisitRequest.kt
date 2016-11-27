@@ -8,6 +8,6 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ConfirmVisitRequest {
-    @POST("/confirmVisit")
+    @POST("confirmVisit")
     fun postJSON(@Header("token") token: String, @Header("isMedic") isMedic: String, @Body body: GetVisit): Call<Message>
 }

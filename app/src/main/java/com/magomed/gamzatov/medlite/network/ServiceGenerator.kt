@@ -10,8 +10,11 @@ import java.util.concurrent.TimeUnit
 class ServiceGenerator {
 
     companion object {
-        val API_BASE_URL = "http://85.188.15.131:8080"
-        val API_PREFIX_URL = "/"
+//        val API_BASE_URL = "http://85.188.15.131:8080"
+//        val API_PREFIX_URL = "/"
+
+        val API_BASE_URL = "http://medlite.azurewebsites.net"
+        val API_PREFIX_URL = "/MedLite-1.0/"
 
 
         private val httpClient = OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).connectTimeout(30, TimeUnit.SECONDS)

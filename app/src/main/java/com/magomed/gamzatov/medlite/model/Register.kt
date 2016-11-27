@@ -5,4 +5,5 @@ data class Register(val name: String,
                     val password: String,
                     var phone: String?,
                     var image: String?,
-                    var callCharge: String?)
+                    var callCharge: String?,
+                    var certificate: String?)
